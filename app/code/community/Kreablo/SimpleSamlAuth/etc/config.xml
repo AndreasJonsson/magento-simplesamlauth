@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Module configuration for simplesamlphp authentication.
+ *
+ * @author Andreas Jonsson
+ */
+ -->
+<config>
+  <modules>
+    <Kreablo_SimpleSamlAuth>
+      <version>1.0</version>
+    </Kreablo_SimpleSamlAuth>
+  </modules>
+  <Admin>
+    <routers>
+      <adminhtml>
+        <args>
+          <modules>
+            <Kreablo_SimpleSamlAuth before="Mage_adminhtml">Kreablo_SimpleSamlAuth_adminhtml</Kreablo_SimpleSamlAuth>
+          </modules>
+        </args>
+      </adminhtml>
+    </routers>
+  </Admin>
+  <default>
+    <simplesamlauth>
+      <simplesamlphp>
+        <installation_path>/usr/share/simplesamlphp</installation_path>
+      </simplesamlphp>
+    </simplesamlauth>
+  </default>
+</config>

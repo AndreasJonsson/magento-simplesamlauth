@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <simplesamlauth>
+      <title>Simple SAML Authentication</title>
+    </simplesamlauth>
+  </menu>
+</config>

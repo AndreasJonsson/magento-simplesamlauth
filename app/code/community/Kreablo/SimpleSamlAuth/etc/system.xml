@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config>
+  <sections>
+    <simplesamlauth>
+      <class>separator-top</class>
+      <label>Simple Saml Auth</label>
+      <tab>system</tab>
+      <sort_order>100</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+
+      <groups>
+        <simplesamlphp translate="label">
+          <label>Simple SAML PHP</label>
+          <fields>
+            <url translate="label">
+              <label>Simple SAML PHP url</label>
+              <comment>The url of the simplesamlphp dicscovery service</comment>
+              <sort_order>10</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </url>
+            <installation_path translate="label">
+              <label>Simple SAML PHP installation path</label>
+              <comment>The directory where simplesamlphp is installed.  Default: /usr/share/simplesamlphp</comment>
+              <sort_order>20</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </installation_path>
+            <username_attribute translate="label">
+              <sort_order>30</sort_order>
+              <label>Username attribute</label>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </username_attribute>
+            <surname_attribute translate="label">
+              <label>Surname attribute</label>
+              <sort_order>50</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </surname_attribute>
+            <given_name_attribute translate="label">
+              <label>Given name attribute</label>
+              <sort_order>40</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </given_name_attribute>
+            <email_attribute translate="label">
+              <label>Email attribute</label>
+              <sort_order>60</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </email_attribute>
+          </fields>
+        </simplesamlphp>
+      </groups>
+    </simplesamlauth>
+  </sections>
+</config>

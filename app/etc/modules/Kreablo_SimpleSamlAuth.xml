@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Authentication plugin for simplesamlphp.
+ *
+ * @author Andreas Jonsson
+ */
+-->
+<config>
+  <modules>
+    <Kreablo_SimpleSamlAuth>
+      <active>true</active>
+      <codePool>community</codePool>
+      <depends>
+        <Mage_adminhtml />
+      </depends>
+    </Kreablo_SimpleSamlAuth>
+  </modules>
+</config>
