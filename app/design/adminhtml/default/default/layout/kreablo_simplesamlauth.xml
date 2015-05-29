@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Layout for adminstrative panel.
+ *
+ * @author Andreas Jonsson
+ */
+-->
+<layout>
+  <adminhtml_simplesamlauth_index>
+    <reference name="content">
+      <block type="kreablo_simplesamlauth/adminhtml_simpleSamlAuth" name="simplesamlauth" />
+    </reference>
+  </adminhtml_simplesamlauth_index>
+
+  <adminhtml_simplesamlauth_configure>
+    <block type="kreablo_simplesamlauth/adminhtml_simpleSamlAuth_configure" name="form" />
+  </adminhtml_simplesamlauth_configure>
+</layout>

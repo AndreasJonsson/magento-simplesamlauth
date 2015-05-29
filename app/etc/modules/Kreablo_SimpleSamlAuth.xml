@@ -12,7 +12,7 @@
       <active>true</active>
       <codePool>community</codePool>
       <depends>
-        <Mage_adminhtml />
+        <Mage_Adminhtml />
       </depends>
     </Kreablo_SimpleSamlAuth>
   </modules>

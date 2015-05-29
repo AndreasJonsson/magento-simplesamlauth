@@ -12,17 +12,47 @@
       <version>1.0</version>
     </Kreablo_SimpleSamlAuth>
   </modules>
-  <Admin>
+  <global>
+    <helpers>
+      <kreablo_simplesamlauth>
+        <class>Kreablo_SimpleSamlAuth_Helper</class>
+      </kreablo_simplesamlauth>
+    </helpers>
+    <blocks>
+      <kreablo_simplesamlauth>
+        <class>Kreablo_SimpleSamlAuth_Block</class>
+      </kreablo_simplesamlauth>
+    </blocks>
+  </global>
+  <adminhtml>
+    <layout>
+      <updates>
+        <kreablo_simplesamlauth>
+          <file>kreablo_simplesamlauth.xml</file>
+        </kreablo_simplesamlauth>
+      </updates>
+    </layout>
+  </adminhtml>
+  <admin>
     <routers>
       <adminhtml>
         <args>
           <modules>
-            <Kreablo_SimpleSamlAuth before="Mage_adminhtml">Kreablo_SimpleSamlAuth_adminhtml</Kreablo_SimpleSamlAuth>
+            <Kreablo_SimpleSamlAuth before="Mage_Adminhtml">Kreablo_SimpleSamlAuth_Adminhtml</Kreablo_SimpleSamlAuth>
           </modules>
         </args>
       </adminhtml>
     </routers>
-  </Admin>
+  </admin>
+  <adminhtml>
+    <layout>
+      <updates>
+        <kreablo_simplesamlauth>
+          <file>kreablo_simplesamlauth.xml</file>
+        </kreablo_simplesamlauth>
+      </updates>
+    </layout>
+  </adminhtml>
   <default>
     <simplesamlauth>
       <simplesamlphp>

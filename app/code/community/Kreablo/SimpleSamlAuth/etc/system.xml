@@ -1,18 +1,24 @@
 <?xml version="1.0"?>
 <config>
   <sections>
-    <simplesamlauth>
+    <simplesamlauth translate="label" module="kreablo_simplesamlauth">
       <class>separator-top</class>
       <label>Simple Saml Auth</label>
-      <tab>system</tab>
-      <sort_order>100</sort_order>
+      <tab>service</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>500</sort_order>
       <show_in_default>1</show_in_default>
       <show_in_website>1</show_in_website>
       <show_in_store>1</show_in_store>
 
       <groups>
-        <simplesamlphp translate="label">
+        <simplesamlphp translate="label" module="kreablo_simplesamlauth">
           <label>Simple SAML PHP</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>100</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
           <fields>
             <url translate="label">
               <label>Simple SAML PHP url</label>
@@ -30,6 +36,17 @@
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </installation_path>
+          </fields>
+        </simplesamlphp>
+        <attribute_mappings translate="label" module="kreablo_simplesamlauth">
+          <label>Simple SAML PHP</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>200</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <label>Attribute mappings</label>
+          <fields>
             <username_attribute translate="label">
               <sort_order>30</sort_order>
               <label>Username attribute</label>
@@ -59,7 +76,7 @@
               <show_in_store>1</show_in_store>
             </email_attribute>
           </fields>
-        </simplesamlphp>
+        </attribute_mappings>
       </groups>
     </simplesamlauth>
   </sections>

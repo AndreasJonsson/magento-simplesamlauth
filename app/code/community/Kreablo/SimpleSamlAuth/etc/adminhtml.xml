@@ -1,8 +1,45 @@
 <?xml version="1.0"?>
 <config>
   <menu>
-    <simplesamlauth>
-      <title>Simple SAML Authentication</title>
-    </simplesamlauth>
+    <system>
+      <children>
+        <simplesamlauth translate="title" module="kreablo_simplesamlauth">
+          <title>Simple SAML Authentication</title>
+          <sort_order>65</sort_order>
+          <action>adminhtml/simpleSamlAuth</action>
+        </simplesamlauth>
+      </children>
+    </system>
   </menu>
+
+  <acl>
+    <resources>
+      <admin>
+        <children>
+          <simplesamlauth translate="title" module="kreablo_simplesamlauth">
+            <title>Simple SAML Authentication</title>
+            <sort_order>65</sort_order>
+            <children>
+              <configure translate="title">
+                <title>Simple SAML configuration</title>
+                <sort_order>0</sort_order>
+              </configure>
+            </children>
+          </simplesamlauth>
+          <system>
+            <children>
+              <config>
+                <children>
+                  <simplesamlauth translate="title" module="kreablo_simplesamlauth">
+                    <title>Configure Simple Saml</title>
+                  </simplesamlauth>
+                </children>
+              </config>
+            </children>
+          </system>
+        </children>
+      </admin>
+    </resources>
+  </acl>
+
 </config>
