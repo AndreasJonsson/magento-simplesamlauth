@@ -18,11 +18,47 @@
         <class>Kreablo_SimpleSamlAuth_Helper</class>
       </kreablo_simplesamlauth>
     </helpers>
+    <models>
+      <kreablo_simplesamlauth>
+        <class>Kreablo_SimpleSamlAuth_Model</class>
+      </kreablo_simplesamlauth>
+    </models>
   </global>
+  <frontend>
+    <layout>
+      <updates>
+        <kreablo_simplesamlauth>
+          <file>kreablo_simplesamlauth.xml</file>
+        </kreablo_simplesamlauth>
+      </updates>
+    </layout>
+    <routers>
+      <kreablo_simplesamlauth>
+        <use>standard</use>
+        <args>
+          <module>Kreablo_SimpleSamlAuth</module>
+          <frontName>simplesamlauth_login</frontName>
+        </args>
+      </kreablo_simplesamlauth>
+    </routers>
+    <events>
+      <customer_session_init>
+        <observers>
+          <kreablo_simplesamlauth>
+            <class>kreablo_simplesamlauth/observer</class>
+            <method>initiateCustomerSession</method>
+            <type>singleton</type>
+          </kreablo_simplesamlauth>
+        </observers>
+      </customer_session_init>
+    </events>
+  </frontend>
   <default>
     <simplesamlauth>
       <simplesamlphp>
+        <sp>default-sp</sp>
         <installation_path>/usr/share/simplesamlphp</installation_path>
+        <email_attribute>mail</email_attribute>
       </simplesamlphp>
     </simplesamlauth>
   </default>

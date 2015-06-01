@@ -10,7 +10,6 @@
       <show_in_default>1</show_in_default>
       <show_in_website>1</show_in_website>
       <show_in_store>1</show_in_store>
-
       <groups>
         <simplesamlphp translate="label" module="kreablo_simplesamlauth">
           <label>Simple SAML PHP</label>
@@ -20,25 +19,45 @@
           <show_in_website>1</show_in_website>
           <show_in_store>1</show_in_store>
           <fields>
-            <url translate="label">
-              <label>Simple SAML PHP url</label>
-              <comment>The url of the simplesamlphp dicscovery service</comment>
-              <sort_order>10</sort_order>
+            <enabled translate="label" module="kreablo_simplesamlauth">
+              <label>Enable simple SAML authentication.</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
-            </url>
-            <installation_path translate="label">
+            </enabled>
+            <sp translate="label comment" module="kreablo_simplesamlauth">
+              <label>Simple SAML PHP authentication source</label>
+              <comment>The simplesaml authentication source, eg, default-sp.</comment>
+              <sort_order>10</sort_order>
+              <depends><enabled>1</enabled></depends>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </sp>
+            <installation_path translate="label comment" module="kreablo_simplesamlauth">
               <label>Simple SAML PHP installation path</label>
               <comment>The directory where simplesamlphp is installed.  Default: /usr/share/simplesamlphp</comment>
               <sort_order>20</sort_order>
+              <depends><enabled>1</enabled></depends>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </installation_path>
+            <email_attribute translate="label" module="kreablo_simplesamlauth">
+              <label>Email attribute</label>
+              <depends><enabled>1</enabled></depends>
+              <validate>required-entry</validate>
+              <sort_order>60</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </email_attribute>
           </fields>
         </simplesamlphp>
         <attribute_mappings translate="label" module="kreablo_simplesamlauth">
+          <depends><enabled>1</enabled></depends>
           <label>Simple SAML PHP</label>
           <frontend_type>text</frontend_type>
           <sort_order>200</sort_order>
@@ -47,34 +66,28 @@
           <show_in_store>1</show_in_store>
           <label>Attribute mappings</label>
           <fields>
-            <username_attribute translate="label">
-              <sort_order>30</sort_order>
-              <label>Username attribute</label>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </username_attribute>
-            <surname_attribute translate="label">
+            <surname_attribute translate="label" module="kreablo_simplesamlauth">
               <label>Surname attribute</label>
               <sort_order>50</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </surname_attribute>
-            <given_name_attribute translate="label">
+            <given_name_attribute translate="label" module="kreablo_simplesamlauth">
               <label>Given name attribute</label>
               <sort_order>40</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </given_name_attribute>
-            <email_attribute translate="label">
-              <label>Email attribute</label>
-              <sort_order>60</sort_order>
+            <custom_attributes translate="label comment" module="kreablo_simplesamlauth">
+              <label>Custom attributes</label>
+              <comment>Semi-colon separated list of pairs on the form &lt;source attribute&gt;=&lt;target attribute&gt;.  Example "school=customer_school_id;telephone=customer_telephone".  Backslash may be used as an escape character.</comment>
+              <sort_order>100</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
-            </email_attribute>
+            </custom_attributes>
           </fields>
         </attribute_mappings>
       </groups>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Addition to the login page.
+ *
+ * @author Andreas Jonsson
+ */
+-->
+<layout>
+  <customer_account_login>
+    <reference name="customer_form_login">
+      <block type="core/template" name="kreablo_simplesamlauth.login_link" as="customer.form.login.extra" template="kreablo_simplesamlauth/login_link.phtml" />
+    </reference>
+  </customer_account_login>
+</layout>
