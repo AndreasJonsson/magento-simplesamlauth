@@ -58,15 +58,17 @@ class Kreablo_SimpleSamlAuth_Model_Observer
         $ret = null;
 
         try {
-            $as = new SimpleSAML_Auth_Simple( self::helper()->getAuthenticationSource() );
 
-            Mage::log('initiateCustomerSession is authenticated: ' . $as->isAuthenticated() );
+            $as = new SimpleSAML_Auth_Simple( self::helper()->getAuthenticationSource() );
 
             if ( $as->isAuthenticated() ) {
                 $attr = $as->getAttributes();
 
                 if ( $this->_loadByEmail( $attr ) ) {
-                    $this->loadCustomerAttributes( $attr );
+                    $this->_loadCustomerAttributes( $attr );
+                    if ($this->_updated) {
+                        $this->_customer->save();
+                    }
                     $ret = $this->_customer;
                 }
             }
@@ -81,14 +83,22 @@ class Kreablo_SimpleSamlAuth_Model_Observer
     private function _loadByEmail( $attr )
     {
         $emailAttr = self::helper()->getEmailAttribute();
-        if ( ! isset( $attr[ $emailAttr ] ) ) {
+        if ( ! isset( $attr[ $emailAttr ] ) || count( $attr[ $emailAttr] ) === 0 ) {
             Mage::log( "SAML Authenticated user do not have any email attribute (no value for $emailAttr).", Zend_Log::Err);
             return false;
         }
 
-        $email = $attr[ $emailAttr ];
+        $email = $attr[ $emailAttr ][0];
 
-        $this->_customer = Mage::model('customer/customer')->loadByEmail( $email );
+        if ( !isset($email) || $email == '' ) {
+            Mage::throwException('No email was set in the SAML attribute (' . $emailAttr . ')' );
+        }
+
+        Mage::log( 'Loading user with email ' . $email );
+
+        $this->_customer = Mage::getModel('customer/customer');
+        $this->_customer->setWebsiteId( Mage::app()->getStore()->getWebsiteId() );
+        $this->_customer->loadByEmail( $email );
 
         if ( $this->_customer->getEmail() === null ) {
             $this->_customer->setEmail( $email );
@@ -117,20 +127,23 @@ class Kreablo_SimpleSamlAuth_Model_Observer
     private function _loadName( $attr )
     {
         $fnAttr = self::helper()->getGivenNameAttribute();
-        if ( isset( $attr[ $fnAttr ] ) ) {
-            $fn = $attr[ $fnAttr ];
-            if ( $this->_eq( $self->_customer->getFirstname(), $fn ) ) {
-                $self->_customer->setFirstname( $fn );
+        if ( isset( $attr[ $fnAttr ] ) && count( $attr[ $fnAttr ] ) > 0) {
+            $fn = $attr[ $fnAttr ][0];
+            Mage::log("Firstname: " . $fn);
+            if ( ! $this->_eq( $this->_customer->getFirstname(), $fn ) ) {
+                $this->_customer->setFirstname( $fn );
             }
         }
 
         $lnAttr = self::helper()->getSurnameAttribute();
-        if ( isset( $attr[ $lnAttr ] ) ) {
-            $ln = $attr[ $lnAttr ];
-            if ( $this->_eq( $self->_customer->getLastname(), $ln ) ) {
-                $self->_customer->setLastname( $ln );
+        if ( isset( $attr[ $lnAttr ] ) && count( $attr[ $lnAttr ] ) > 0) {
+            $ln = $attr[ $lnAttr ][0];
+            Mage::log("Lastname: " . $fn );
+            if ( ! $this->_eq( $this->_customer->getLastname(), $ln ) ) {
+                $this->_customer->setLastname( $ln );
             }
         }
+        Mage::log('fnAttr: ' . $fnAttr . ', lnAttr: ' . $lnAttr . ' attr: ' . print_r( $attr , true ) );
     }
 
     private function _loadAddress( $attr ) {
@@ -143,7 +156,7 @@ class Kreablo_SimpleSamlAuth_Model_Observer
         if (self::$_customAttributes === null) {
             $custom = self::helper()->getCustomAttributes();
 
-            $keyValues = preg_split('/(?<!\\);');
+            $keyValues = preg_split('/(?<!\\\\);/', $custom);
 
             $attributes = array();
 
@@ -170,8 +183,9 @@ class Kreablo_SimpleSamlAuth_Model_Observer
     }
 
     private function _loadCustomAttribute( $attr, $sourceAttribute, $targetAttribute ) {
-        if ( isset($attr[ $sourceAttribute ]) ) {
-            $attrValue = $attr[ $sourceAttribute ];
+        if ( isset($attr[ $sourceAttribute ]) && count($attr[ $sourceAttribute ]) > 0) {
+            $attrValue = $attr[ $sourceAttribute ][0];
+            Mage::log("custom attribute: $targetAttribute = $attrValue");
             if ( ! $this->_eq( $this->_customer->getData( $targetAttribute ), $attrValue ) ) {
                 $this->_customer->setData( $targetAttribute, $attrValue );
             }

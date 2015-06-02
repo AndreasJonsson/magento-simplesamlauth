@@ -54,6 +54,14 @@
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </email_attribute>
+            <login_button_icon translate="label comment" module="kreablo_simplesamlauth">
+              <label>Icon for login button</label>
+              <comment>An URL to an image that will be used to render the login button.</comment>
+              <sort_order>500</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </login_button_icon>
           </fields>
         </simplesamlphp>
         <attribute_mappings translate="label" module="kreablo_simplesamlauth">
@@ -82,7 +90,7 @@
             </given_name_attribute>
             <custom_attributes translate="label comment" module="kreablo_simplesamlauth">
               <label>Custom attributes</label>
-              <comment>Semi-colon separated list of pairs on the form &lt;source attribute&gt;=&lt;target attribute&gt;.  Example "school=customer_school_id;telephone=customer_telephone".  Backslash may be used as an escape character.</comment>
+              <comment>Semi-colon separated list of pairs on the form &amp;lt;source attribute&amp;gt;=&amp;lt;target attribute&amp;gt;.  Example "school=customer_school_id;telephone=customer_telephone".  Backslash may be used as an escape character.</comment>
               <sort_order>100</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>

@@ -59,6 +59,7 @@
         <sp>default-sp</sp>
         <installation_path>/usr/share/simplesamlphp</installation_path>
         <email_attribute>mail</email_attribute>
+        <login_button_icon>https://rnd.feide.no/files/simplesamlphp-s.png</login_button_icon>
       </simplesamlphp>
     </simplesamlauth>
   </default>

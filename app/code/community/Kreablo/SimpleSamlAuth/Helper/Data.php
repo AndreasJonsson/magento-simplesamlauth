@@ -40,25 +40,32 @@ class Kreablo_SimpleSamlAuth_Helper_Data extends Mage_Core_Helper_Data {
     const XML_PATH_SP = 'simplesamlauth/simplesamlphp/sp';
 
     /**
+     * configuration key for login button icon.
+     *
+     * @var string
+     */
+    const XML_PATH_LOGIN_BUTTON_ICON = 'simplesamlauth/simplesamlphp/login_button_icon';
+
+    /**
      * configuration key for the username attribute to be used form mapping the user field.
      *
      * @var string
      */
-    const XML_PATH_USERNAME_ATTRIBUTE = 'simplesamlauth/attribute_mapping/username_attribute';
+    const XML_PATH_USERNAME_ATTRIBUTE = 'simplesamlauth/attribute_mappings/username_attribute';
 
     /**
      * configuration key for the given name attribute to be used form mapping the user field.
      *
      * @var string
      */
-    const XML_PATH_GIVEN_NAME_ATTRIBUTE = 'simplesamlauth/attribute_mapping/given_name_attribute';
+    const XML_PATH_GIVEN_NAME_ATTRIBUTE = 'simplesamlauth/attribute_mappings/given_name_attribute';
 
     /**
      * configuration key for the surname attribute to be used form mapping the user field.
      *
      * @var string
      */
-    const XML_PATH_SURNAME_ATTRIBUTE = 'simplesamlauth/attribute_mapping/surname_attribute';
+    const XML_PATH_SURNAME_ATTRIBUTE = 'simplesamlauth/attribute_mappings/surname_attribute';
 
     /**
      * configuration key for the email attribute to be used form mapping the user field.
@@ -72,7 +79,7 @@ class Kreablo_SimpleSamlAuth_Helper_Data extends Mage_Core_Helper_Data {
      *
      * @var string
      */
-    const XML_PATH_CUSTOM_ATTRIBUTES = 'simplesamlauth/attribute_mapping/custom_attributes';
+    const XML_PATH_CUSTOM_ATTRIBUTES = 'simplesamlauth/attribute_mappings/custom_attributes';
 
     /**
      * @return boolean Whether SAML authentication is enabled.
@@ -119,7 +126,7 @@ class Kreablo_SimpleSamlAuth_Helper_Data extends Mage_Core_Helper_Data {
      */
     public function getSurnameAttribute()
     {
-        return Mage::getStoreConfig(self::XML_PATH_SURNAME);
+        return Mage::getStoreConfig(self::XML_PATH_SURNAME_ATTRIBUTE);
     }
 
     /**
@@ -143,6 +150,14 @@ class Kreablo_SimpleSamlAuth_Helper_Data extends Mage_Core_Helper_Data {
     public function getCustomAttributes()
     {
         return Mage::getStoreConfig(self::XML_PATH_CUSTOM_ATTRIBUTES);
+    }
+
+    /**
+     * @return string The configured url for the login button icon.
+     */
+    public function getLoginButtonIcon()
+    {
+        return Mage::getStoreConfig(self::XML_PATH_LOGIN_BUTTON_ICON);
     }
     
 }

@@ -38,7 +38,7 @@ class Kreablo_SimpleSamlAuth_IndexController extends Mage_Core_Controller_Front_
 
         $as = new SimpleSAML_Auth_Simple( self::helper()->getAuthenticationSource() );
 
-        $as->requireAuth();
+        $as->requireAuth( array( 'ReturnTo' => Mage::getUrl('/customer/account') ) );
 
         $this->_redirect('/customer/account');
     }
