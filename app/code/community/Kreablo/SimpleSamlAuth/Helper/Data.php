@@ -40,11 +40,18 @@ class Kreablo_SimpleSamlAuth_Helper_Data extends Mage_Core_Helper_Data {
     const XML_PATH_SP = 'simplesamlauth/simplesamlphp/sp';
 
     /**
-     * configuration key for login button icon.
+     * configuration key for login link icon.
      *
      * @var string
      */
-    const XML_PATH_LOGIN_BUTTON_ICON = 'simplesamlauth/simplesamlphp/login_button_icon';
+    const XML_PATH_LOGIN_LINK_ICON = 'simplesamlauth/simplesamlphp/login_link_icon';
+
+    /**
+     * configuration key for login link text.
+     *
+     * @var string
+     */
+    const XML_PATH_LOGIN_LINK_TEXT = 'simplesamlauth/simplesamlphp/login_link_text';
 
     /**
      * configuration key for the username attribute to be used form mapping the user field.
@@ -153,11 +160,19 @@ class Kreablo_SimpleSamlAuth_Helper_Data extends Mage_Core_Helper_Data {
     }
 
     /**
-     * @return string The configured url for the login button icon.
+     * @return string The configured url for the login link icon.
      */
-    public function getLoginButtonIcon()
+    public function getLoginLinkIcon()
     {
-        return Mage::getStoreConfig(self::XML_PATH_LOGIN_BUTTON_ICON);
+        return Mage::getStoreConfig(self::XML_PATH_LOGIN_LINK_ICON);
+    }
+
+    /**
+     * @return string The configured text for the login link.
+     */
+    public function getLoginLinkText()
+    {
+        return Mage::getStoreConfig(self::XML_PATH_LOGIN_LINK_TEXT);
     }
     
 }

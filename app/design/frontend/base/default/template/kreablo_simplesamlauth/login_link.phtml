@@ -1,11 +1,16 @@
-<?php if ( Mage::helper('kreablo_simplesamlauth')->isEnabled() ) {
-     $login_msg = Mage::helper('kreablo_simplesamlauth')->__('Login using SAML account');
+<?php
+if ( Mage::helper('kreablo_simplesamlauth')->isEnabled() ) {
+
+    $login_msg = Mage::helper('kreablo_simplesamlauth')->getLoginLinkText();
+    if ( $login_msg === null || $login_msg == '' ) {
+        $login_msg = Mage::helper('kreablo_simplesamlauth')->__('Login using SAML account');
+    }
  ?>
 <div class="simplesamlauth-login-link" style="width: 100%; padding: 0.5em; text-align: center;" ><p><a href="<?php echo Mage::getUrl('simplesamlauth_login'); ?>"><?php echo $login_msg ?></a></p>
 <?php
-     $login_button_icon = Mage::helper('kreablo_simplesamlauth')->getLoginButtonIcon();
-     if ( $login_button_icon != '' ) {
-?> <p><a href="<?php echo Mage::getUrl('simplesamlauth_login'); ?>"><img src="<?php echo $login_button_icon; ?>" alt="<?php echo $login_msg ?>" title="<?php echo $login_msg ?>" ></img></a></p> <?php
+     $login_link_icon = Mage::helper('kreablo_simplesamlauth')->getLoginLinkIcon();
+     if ( $login_link_icon != '' ) {
+?> <p><a href="<?php echo Mage::getUrl('simplesamlauth_login'); ?>"><img src="<?php echo $login_link_icon; ?>" alt="<?php echo $login_msg ?>" title="<?php echo $login_msg ?>" ></img></a></p> <?php
      }
 
      echo '</div>';
