@@ -26,6 +26,14 @@ class Kreablo_SimpleSamlAuth_Helper_Data extends Mage_Core_Helper_Data {
     const XML_PATH_ENABLED = 'simplesamlauth/simplesamlphp/enabled';
 
     /**
+     * configuration key for simplesaml userassoc enabled flag.
+     * 
+     * @var boolean
+     */
+    const XML_PATH_USERASSOC_ENABLED = 'simplesamlauth/simplesamlphp/userassoc_enabled';
+
+
+    /**
      * configuration key for simplesamlphp installation path.
      *
      * @var string
@@ -94,6 +102,14 @@ class Kreablo_SimpleSamlAuth_Helper_Data extends Mage_Core_Helper_Data {
     public function isEnabled()
     {
         return Mage::getStoreConfigFlag(self::XML_PATH_ENABLED);
+    }
+
+    /**
+     * @return boolean Wheter SAML user account association is enabled.
+     */
+    public function isUserAssocEnabled()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_USERASSOC_ENABLED);
     }
 
     /**

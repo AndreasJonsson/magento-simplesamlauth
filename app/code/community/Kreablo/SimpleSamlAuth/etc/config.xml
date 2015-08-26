@@ -9,7 +9,7 @@
 <config>
   <modules>
     <Kreablo_SimpleSamlAuth>
-      <version>1.0</version>
+      <version>1.1.0</version>
     </Kreablo_SimpleSamlAuth>
   </modules>
   <global>
@@ -22,7 +22,27 @@
       <kreablo_simplesamlauth>
         <class>Kreablo_SimpleSamlAuth_Model</class>
       </kreablo_simplesamlauth>
+      <kreablo_simplesamlauth_userassoc>
+        <class>Kreablo_SimpleSamlAuth_Model_UserAssoc</class>
+        <resourceModel>kreablo_simplesamlauth_userassoc_resource</resourceModel>
+      </kreablo_simplesamlauth_userassoc>
+      <kreablo_simplesamlauth_userassoc_resource>
+        <class>Kreablo_SimpleSamlAuth_Model_Resource</class>
+        <entities>
+          <userAssoc>
+            <table>kreablo_simplesamlauth_userassoc</table>
+          </userAssoc>
+        </entities>
+      </kreablo_simplesamlauth_userassoc_resource>
     </models>
+    <resources>
+      <kreablo_simplesamlauth_setup>
+        <setup>
+          <module>Kreablo_SimpleSamlAuth</module>
+          <class>Mage_Core_Model_Resource_Setup</class>
+        </setup>
+      </kreablo_simplesamlauth_setup>
+    </resources>
   </global>
   <frontend>
     <layout>
@@ -47,7 +67,6 @@
           <kreablo_simplesamlauth>
             <class>kreablo_simplesamlauth/observer</class>
             <method>initiateCustomerSession</method>
-            <type>singleton</type>
           </kreablo_simplesamlauth>
         </observers>
       </customer_session_init>
@@ -69,6 +88,7 @@
         <installation_path>/usr/share/simplesamlphp</installation_path>
         <email_attribute>mail</email_attribute>
         <login_link_icon>https://rnd.feide.no/files/simplesamlphp-s.png</login_link_icon>
+        <userassoc_enabled>0</userassoc_enabled>
       </simplesamlphp>
     </simplesamlauth>
   </default>

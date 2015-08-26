@@ -27,20 +27,75 @@ class Kreablo_SimpleSamlAuth_IndexController extends Mage_Core_Controller_Front_
     public function preDispatch()
     {
         if (! self::helper()->isEnabled()) {
-            $this->_redirect('noroute');
+            $this->_redirect('noRoute');
             return;
         }
     }
 
     public function indexAction()
     {
-        require_once self::helper()->getInstallationPath() . '/lib/_autoload.php';
+        $as = Mage::getSingleton('Kreablo_SimpleSamlAuth_Model_AuthenticationSource');
 
-        $as = new SimpleSAML_Auth_Simple( self::helper()->getAuthenticationSource() );
+        $as->requireAuth();
 
-        $as->requireAuth( array( 'ReturnTo' => Mage::getUrl('/customer/account') ) );
+        $session = Mage::getSingleton('customer/session');
 
-        $this->_redirect('/customer/account');
+        $nouserassoc = false;
+        $error = false;
+
+        if ( $this->getRequest()->isPost() ) {
+            try {
+                $nouserassoc = $this->getRequest()->getPost('nouserassoc', false);
+                $userassoc = $this->getRequest()->getPost('userassoc');
+
+                if ($nouserassoc) {
+                    $errMsg = $as->createUserAssoc();
+                } else {
+                    $username = $userassoc['username'];
+                    $password = $userassoc['password'];
+
+                    if (empty($username) || empty($password)) {
+                        $errMsg = $this->__('Login and password are required.');
+                    } else {
+                        $errMsg = $as->createUserAssoc($username, $password);
+                    }
+                }
+            } catch (Mage_Core_Exception $e) {
+                    switch ($e->getCode()) {
+                        case Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED:
+                            $value = Mage::helper('customer')->getEmailConfirmationUrl($userassoc['username']);
+                            $message = Mage::helper('customer')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
+                            break;
+                        case Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD:
+                            $message = $e->getMessage();
+                            break;
+                        default:
+                            $message = $e->getMessage();
+                    }
+                    $session->addError($message);
+                    $session->setUsername($userassoc['username']);
+                    $error = true;
+            } catch (Exception $e) {
+                $session->addError($this->__('Caught exception'));
+                $error = true;
+            }
+
+            if (!empty($errMsg)) {
+                $session->addError($errMsg);
+                $error = true;
+            }
+
+        }
+
+        if ( $error ) {
+            $this->_redirect('*/*/');
+        } elseif (!$nouserassoc && $as->needsUserAssoc()) {
+            $this->loadLayout();
+            $this->_initLayoutMessages('customer/session');
+            $this->renderLayout();
+        } else {
+            $this->_redirect('/customer/account');
+        }
     }
 
 }

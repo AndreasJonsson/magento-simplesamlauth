@@ -1,1 +1,6 @@
+"Associate account","Koppla ihop konto"
+"Associate existing account with SSO account","Koppla befintligt konto till SSO-inloggning"
+"If you have an account with us, please associate it with your SSO account by filling out this form.","Detta är första gången du loggar in med SSO.  Om du redan har ett konto hos oss kan du koppla din SSO-inloggning till det genom att fylla i befintliga inloggningsuppgifter här."
 "Login using SAML account","Logga in med SAML-konto"
+"I do not have an account.","Jag har inget befintligt konto."
+"Click here if you do not already have an account.","Klicka här om du inte har något befintligt konto."

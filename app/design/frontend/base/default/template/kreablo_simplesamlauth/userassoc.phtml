@@ -1,0 +1,30 @@
+<div class="kreablo-simplesamlauth-userassoc">
+  <div class="page-title">
+    <h1><?php echo $this->__('Associate existing account with SSO account') ?></h1>
+  </div>
+  <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+  <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+    <h2><?php echo $this->__('Registered Customers') ?></h2>
+    <p><?php echo $this->__('If you have an account with us, please associate it with your SSO account by filling out this form.') ?></p>
+    <ul class="form-list">
+      <li>
+        <label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+        <div class="input-box">
+          <input type="text" name="userassoc[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+        </div>
+      </li>
+      <li>
+        <label for="pass" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+        <div class="input-box">
+          <input type="password" name="userassoc[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+        </div>
+      </li>
+      <?php echo $this->getChildHtml('form.additional.info'); ?>
+    </ul>
+    <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+    <div>
+      <button type="submit" class="button" title="<?php echo $this->__('Associate account') ?>" name="send" id="send2" value="userassoc"><span><span><?php echo $this->__('Associate account') ?></span></span></button>
+      <button type="submit" class="button" title="<?php echo $this->__('Click here if you do not already have an account.') ?>" name="nouserassoc" id="send3" value="nouserassoc"><span><span><?php echo $this->__('I do not have an account.') ?></span></span></button>
+    </div>
+  </form>
+</div>
